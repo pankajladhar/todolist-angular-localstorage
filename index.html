@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="toDoApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TO DO List - Using Angular and Local Storage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <div ng-controller="toDoAppCtrl" class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+                    <h1 class="text-align-center app-title">{{appTitle}}</h1>
+                    <div class="clearfix">
+                        <div class="col-md-2 padding-zero">
+                            <!-- <input type="submit" value="Toggle List" ng-click="toggleToDoTaskList()" class="btn btn-success" /> -->
+                            <button ng-click="toggleToDoTaskList()" class="btn btn-success">
+                                <span>Toggle List</span>
+                            </button>
+                        </div>
+                        <div class="col-md-10">
+                            <form name="toDoForm" ng-submit="addToDoTask()" class="form-horizontal" role="form">
+                                <div class="form-group">                                    
+                                    <input type="text" class="form-control" placeholder="add task" ng-model="toDoTask" required autofoucs>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div ng-show="isToggleToDoTaskList" class="col-md-12">
+                        <div ng-show='toDoTaskList!=""' class="clearfix">
+                            <h2>{{remainingTask()}} of {{toDoTaskList.length}} remaining</h2>
+
+                            <div class="col-md-4 padding-zero">
+                                <input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
+                                <label for="">Select /Deselect all</label>
+                            </div>
+
+                            <div class="col-md-8 text-align-right padding-zero" ng-show="remainingTask() < toDoTaskList.length">
+                                <input type="submit" value="Removed Completed" ng-click="removedCompletedTask()"  class="btn btn-danger">
+                                <input type="submit" value="{{btnTitle}}" ng-click="showCompletedTask()" class="btn btn-info" />
+                            </div>
+
+                        </div>
+                        <ul>
+                            <li ng-repeat="toDoTaskItem in toDoTaskList track by $index" class="clearfix">
+
+                                <div class="col-md-10 col-sm-10 col-xs-10 padding-zero task-option">
+                                    <input type="checkbox" ng-model="toDoTaskItem.completionStatus" ng-click="toggleCompleted(toDoTaskItem)">
+
+                                    <span ng-dblclick="toggleEditMode()" class="task-value" ng-class='{"text-strike": toDoTaskItem.completionStatus}'>{{toDoTaskItem.taskTitle}}</span>
+
+                                    <input type="text" value='{{toDoTaskItem.taskTitle}}' class="editAble form-control" ng-keyup="editOnEnter(toDoTaskItem)" ng-model="toDoTaskItem.taskTitle">
+                                </div>
+
+                                <div class="col-md-2 col-sm-2 col-xs-2 text-align-right padding-zero remove-task-wrapper">
+                                    <a href="javascript:void(0)" ng-click="removeToDoTask(toDoTaskItem)" class="btn btn-danger remove-task">X</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="script/angular.min.js"></script>   
+    <script src="script/script.js"></script>
+</body>
+
+</html>
