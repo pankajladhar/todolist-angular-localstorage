@@ -1,0 +1,142 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400; }
+
+.app-wrapper {
+  border-top: 20px #c32c3d solid;
+  margin-bottom: 20px; }
+  .app-wrapper .top-buffer {
+    margin-top: 30px; }
+  .app-wrapper .appTitle {
+    display: block;
+    background: #f0374b;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 40px;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0 20px;
+    line-height: 1; }
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  cursor: pointer;
+  z-index: 1000;
+  border: 2px #f0374b solid;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  outline: none !important;
+  outline-offset: 0;
+  margin-top: 4px; }
+  input[type="checkbox"]:hover {
+    border: 2px #4fad53 solid; }
+  input[type="checkbox"]:checked {
+    background: #4fad53;
+    border: 2px #4fad53 solid; }
+    input[type="checkbox"]:checked::before {
+      display: block;
+      content: '\2714';
+      font-size: 15px;
+      position: absolute;
+      top: -2px;
+      left: 2px;
+      color: #fff; }
+
+div.add-task {
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(113, 113, 113, 0.5); }
+
+.form-control {
+  height: 45px; }
+  .form-control:focus {
+    border-color: #f0374b;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #F28792; }
+
+.list-container {
+  margin: 20px 0 0;
+  box-shadow: 0px 4px 10px rgba(113, 113, 113, 0.5); }
+  .list-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .list-container ul li {
+      font-size: 16px;
+      text-transform: capitalize; }
+    .list-container ul.todo-container {
+      padding: 10px 15px 20px; }
+      .list-container ul.todo-container h4.placeholder-task {
+        margin: 10px 0 0 10px; }
+      .list-container ul.todo-container li {
+        padding: 10px;
+        border-bottom: 1px #ddd solid;
+        width: 100%; }
+        .list-container ul.todo-container li:hover {
+          background: #FAFAED; }
+        .list-container ul.todo-container li .task-title {
+          float: left;
+          padding: 6px 15px 4px;
+          line-height: 1;
+          width: 90%; }
+        .list-container ul.todo-container li.text-strike span {
+          text-decoration: line-through;
+          color: #AEACAC; }
+        .list-container ul.todo-container li form.editAble {
+          display: none;
+          width: 100%; }
+          .list-container ul.todo-container li form.editAble input.form-control {
+            height: 35px; }
+        .list-container ul.todo-container li.editing {
+          display: inline-block; }
+          .list-container ul.todo-container li.editing span.task-title, .list-container ul.todo-container li.editing .option-input, .list-container ul.todo-container li.editing .remove-task {
+            display: none; }
+          .list-container ul.todo-container li.editing form.editAble {
+            display: inline-block; }
+        .list-container ul.todo-container li .remove-task {
+          border-radius: 50%;
+          padding: 2px 8px;
+          float: right; }
+
+.option-input {
+  float: left; }
+  .option-input.option-input-all {
+    width: 40px;
+    height: 40px; }
+    .option-input.option-input-all:checked::before {
+      font-size: 32px;
+      top: -3px;
+      left: 5px; }
+
+.extra-control {
+  overflow: hidden;
+  background-color: #f0374b;
+  padding: 10px; }
+  .extra-control ul li a {
+    display: block;
+    float: left;
+    color: #fff;
+    padding: 4px 10px;
+    margin-right: 4px;
+    border: 1px #f0374b solid; }
+    .extra-control ul li a.selected {
+      border: 1px #fff solid;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px; }
+    .extra-control ul li a:hover {
+      border: 1px #fff solid;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      text-decoration: none; }
+    .extra-control ul li a.clear-all {
+      float: right; }
+
+/*# sourceMappingURL=style.css.map */
