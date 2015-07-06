@@ -82,7 +82,7 @@ describe('TODO App Controllers', function(){
             });
         });
 
-        xdescribe('having no Todos', function () {
+        describe('having no Todos', function () {
             it('should have all Todos completed', function () {
                 scope.$digest();
                 expect(scope.allChecked).toBeTruthy();
@@ -113,7 +113,7 @@ describe('TODO App Controllers', function(){
             });
         });
 
-        xdescribe('having some saved Todos', function () {
+        describe('having some saved Todos', function () {
 
             beforeEach(inject(function($controller){
 
