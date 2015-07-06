@@ -1,20 +1,30 @@
-xdescribe('directive tests', function() {
+/*global describe, it, beforeEach, inject, expect, angular*/
+(function () {
+    'use strict';
+
     beforeEach(module('toDoApp'));
-    it('should set border-radius to 10',
-        inject(function($compile,$rootScope) {
+
+    describe('todoFocus directive', function () {
+        var scope, compile, browser;
+
+        beforeEach(inject(function ($rootScope, $compile, $browser) {
             scope = $rootScope.$new();
+            compile = $compile;
+            browser = $browser;
+        }));
 
-            // get an element representation
-            elem = angular.element("<span custom-border-radius=\"10\">sample</span>");
+        it('should focus on truthy expression', function () {
+            var el = angular.element('<input todo-focus="focus">');
+            scope.focus = false;
 
-            // create a new child scope
-            scope = $rootScope.$new();
+            compile(el)(scope);
+            expect(browser.deferredFns.length).toBe(0);
 
-            // finally compile the HTML
-            $compile(elem)(scope);
+            scope.$apply(function () {
+                scope.focus = true;
+            });
 
-            // expect the background-color css property to be desirabe one
-            expect(elem.css("border-radius")).toEqual('10px');
-        })
-    );
-});
+            expect(browser.deferredFns.length).toBe(1);
+        });
+    });
+}());
