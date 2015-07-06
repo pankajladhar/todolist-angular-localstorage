@@ -41,6 +41,47 @@ describe('TODO App Controllers', function(){
             expect(scope.todos.length).toBe(0);
         });
 
+        describe('the filter', function () {
+            it('should default to ""', function () {
+                scope.$emit('$routeChangeSuccess');
+
+                expect(scope.status).toBe('');
+                expect(scope.statusFilter.completionStatus).toBeUndefined();
+            });
+
+            describe('being at /active', function () {
+                var ctrl;
+                it('should filter non-completed', inject(function ($controller) {
+                    ctrl = $controller('TodoController', {
+                        $scope: scope,
+                        mocktoDoAppService :mocktoDoAppService,
+                        $routeParams: {
+                            status: 'active'
+                        }
+                    });
+
+                    scope.$emit('$routeChangeSuccess');
+                    expect(scope.statusFilter.completionStatus).toBeFalsy();
+                }));
+            });
+
+            describe('being at /completed', function () {
+                var ctrl;
+                it('should filter completed', inject(function ($controller) {
+                    ctrl = $controller('TodoController', {
+                        $scope: scope,
+                        $routeParams: {
+                            status: 'completed'
+                        },
+                        mocktoDoAppService :mocktoDoAppService
+                    });
+
+                    scope.$emit('$routeChangeSuccess');
+                    expect(scope.statusFilter.completionStatus).toBeTruthy();
+                }));
+            });
+        });
+
         xdescribe('having no Todos', function () {
             it('should have all Todos completed', function () {
                 scope.$digest();
@@ -72,7 +113,7 @@ describe('TODO App Controllers', function(){
             });
         });
 
-        describe('having some saved Todos', function () {
+        xdescribe('having some saved Todos', function () {
 
             beforeEach(inject(function($controller){
 
@@ -80,15 +121,15 @@ describe('TODO App Controllers', function(){
                 mocktoDoAppService.insert({ taskTitle: 'Uncompleted Item 2', completionStatus: false });
                 mocktoDoAppService.insert({ taskTitle: 'Completed Item 0', completionStatus: true })
                 mocktoDoAppService.insert({ taskTitle: 'Completed Item 1', completionStatus: true })
-
+                scope.$digest();
             }));
 
             it('should count Todos correctly', function () {
 
                 expect(scope.todos.length).toBe(4);
                 expect(scope.remainingTask).toBe(2);
-                //expect(scope.completedCount).toBe(2);
-                //expect(scope.allChecked).toBeFalsy();
+                expect(scope.completedCount).toBe(2);
+                expect(scope.allChecked).toBeFalsy();
             });
 
             it('should save Todos to local storage', function () {
@@ -96,33 +137,29 @@ describe('TODO App Controllers', function(){
             });
 
 
+            it('clearCompletedTodos() should clear completed Todos', function () {
+                scope.clearCompletedTodos();
+                expect(scope.todos.length).toBe(2);
+            });
+
+            it('markAll() should mark all Todos completed', function () {
+                scope.markAllCompleted(true);
+                scope.$digest();
+                expect(scope.completedCount).toBe(4);
+            });
+
+            it('revertTodo() get a Todo to its previous state', function () {
+                var todo = mocktoDoAppService.todos[0];
+                scope.toggleEditMode(todo);
+                todo.title = 'Unicorn sparkly skypuffles.';
+                scope.revertEdits(todo);
+                scope.$digest();
+                expect(scope.todos[0].taskTitle).toBe('Uncompleted Item 1');
+            });
+
+
         });
 
-
-        //
-        //it('should change completion status',function(){
-        //    scope.toggleCompleted(scope.todos[0]);
-        //    expect(scope.todos[0].completionStatus).toBe(true);
-        //});
-        //
-        //
-        //it('should return notes array with two elements initially and then remove one', function(){
-        //    expect(scope.todos.length).toBe(3);
-        //    scope.removeToDoTask(scope.todos[0]);
-        //    expect(scope.todos.length).toBe(2);
-        //});
-        //
-        //it('should change Task Title',function(){
-        //    scope.saveEdits(scope.todos[0]);
-        //    expect(scope.todos[0].taskTitle).toBe('Task11');
-        //});
-        //
-        //it('should remove all todos', function(){
-        //    expect(scope.todos.length).toBe(2);
-        //    scope.clearCompletedTodos();
-        //    console.log('dd',scope.todos.length)
-        //    expect(scope.todos.length).toBe(0);
-        //})
     })
 
 });
