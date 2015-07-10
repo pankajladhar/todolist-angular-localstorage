@@ -83,7 +83,7 @@ describe('TODO App', function() {
             editedTodo.sendKeys(protractor.Key.ENTER);
 
             var textOfSpan = todoList.get(0).element(by.css('.task-title'));
-            expect(textOfSpan.getText()).toEqual('1 Edited Task');
+            expect(textOfSpan.getText()).toEqual('1. Edited Task');
 
 
         });
@@ -112,6 +112,12 @@ describe('TODO App', function() {
             eventList.get(3).click();
             expect(todoList.count()).toEqual(2);
             expect(remainingTaskCount.getText()).toEqual('2');
+        });
+
+        it('should make all taks completed when click on Mark completed all checkbox', function(){
+            var checkBox = element(by.id('option-input-all'));
+            checkBox.click();
+            expect(remainingTaskCount.getText()).toEqual('0');
         });
     });
 });
