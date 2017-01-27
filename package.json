@@ -1,5 +1,5 @@
 {
-  "name": "karma-jasmin-seed",
+  "name": "todolist-angular-localstorage",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "http-server": "^0.9.0",
     "jasmine-core": "^2.3.4",
     "karma": "^0.12.36",
     "karma-chrome-launcher": "^0.1.12",
